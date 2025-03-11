@@ -12,6 +12,8 @@
 
 #include <openxr/openxr.h>
 
+#include <xrtl/result.h>
 #include <xrtl/unique_handle.h>
+#include <xrtl/xr_error_category.h>
 
 #endif /* !defined(_PCH_H) */

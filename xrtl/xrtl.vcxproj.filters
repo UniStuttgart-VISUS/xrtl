@@ -21,10 +21,19 @@
     <ClInclude Include="include\xrtl\api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\xrtl\xr_error_category.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\xrtl\result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="include\xrtl\unique_handle.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\xrtl\xr_error_category.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

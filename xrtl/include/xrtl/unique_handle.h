@@ -62,7 +62,7 @@ public:
     /// </summary>
     /// <returns>The native handle.</returns>
     inline handle_type get(void) const noexcept {
-        return this->value;
+        return this->_handle;
     }
 
     /// <summary>

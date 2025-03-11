@@ -19,7 +19,7 @@ public:
     TEST_METHOD(test_instance) {
         XrInstanceCreateInfo ci { XR_TYPE_INSTANCE_CREATE_INFO };
         xrtl::unique_instance instance;
-        ::xrCreateInstance(&ci, instance.put());
+        Assert::AreEqual(0, int(::xrCreateInstance(&ci, instance.put())), L"Create instance", LINE_INFO());
     }
 };
 
