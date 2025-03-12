@@ -21,6 +21,13 @@ public:
         Assert::AreEqual(std::string("1"), xrtl::xr_category().message(XR_TIMEOUT_EXPIRED), L"message w/o instance", LINE_INFO());
 
         XrInstanceCreateInfo ci { XR_TYPE_INSTANCE_CREATE_INFO };
+        ::strncpy_s(ci.applicationInfo.applicationName, "Test", XR_MAX_APPLICATION_NAME_SIZE);
+        ci.applicationInfo.applicationVersion = 1;
+        ::strncpy_s(ci.applicationInfo.engineName, "Test", XR_MAX_ENGINE_NAME_SIZE);
+        ci.applicationInfo.engineVersion = 1;
+        ci.applicationInfo.apiVersion = XR_MAKE_VERSION(1, 0, 0);
+        ci.enabledApiLayerCount = 0;
+        ci.enabledExtensionCount = 0;
         xrtl::unique_instance instance;
         Assert::AreEqual(0, int(::xrCreateInstance(&ci, instance.put())), L"Create instance", LINE_INFO());
 
@@ -36,6 +43,22 @@ public:
         Assert::ExpectException<std::system_error>([](void) {
             THROW_XR_RESULT_MSG(XR_TIMEOUT_EXPIRED, "blah");
         }, L"THROW_XR_RESULT_MSG", LINE_INFO());
+
+        Assert::ExpectException<std::system_error>([](void) {
+            THROW_XR_RESULT_IF(XR_TIMEOUT_EXPIRED, true);
+        }, L"THROW_XR_RESULT_IF", LINE_INFO());
+
+        Assert::ExpectException<std::system_error>([](void) {
+            THROW_XR_RESULT_IF_MSG(XR_TIMEOUT_EXPIRED, true, "blubb");
+        }, L"THROW_XR_RESULT_IF_MSG", LINE_INFO());
+
+        Assert::ExpectException<std::system_error>([](void) {
+            THROW_IF_XR_FAILED(XR_ERROR_VALIDATION_FAILURE);
+        }, L"THROW_XR_THROW_IF_XR_FAILEDRESULT", LINE_INFO());
+
+        Assert::ExpectException<std::system_error>([](void) {
+            THROW_IF_XR_FAILED_MSG(XR_ERROR_VALIDATION_FAILURE, "hurz");
+        }, L"THROW_IF_XR_FAILED_MSG", LINE_INFO());
     }
 };
 
