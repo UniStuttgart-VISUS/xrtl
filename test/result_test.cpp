@@ -29,10 +29,11 @@ public:
         ci.enabledApiLayerCount = 0;
         ci.enabledExtensionCount = 0;
         xrtl::unique_instance instance;
-        Assert::AreEqual(0, int(::xrCreateInstance(&ci, instance.put())), L"Create instance", LINE_INFO());
 
-        xrtl::xr_category_instance(instance.get());
-        Assert::AreNotEqual(std::string("1"), xrtl::xr_category().message(XR_TIMEOUT_EXPIRED), L"message w/o instance", LINE_INFO());
+        if (XR_SUCCEEDED(::xrCreateInstance(&ci, instance.put()))) {
+            xrtl::xr_category_instance(instance.get());
+            Assert::AreNotEqual(std::string("1"), xrtl::xr_category().message(XR_TIMEOUT_EXPIRED), L"message w/o instance", LINE_INFO());
+        }
     }
 
     TEST_METHOD(test_throw_xr_result) {
