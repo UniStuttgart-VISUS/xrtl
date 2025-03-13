@@ -62,7 +62,6 @@ template<class TValue> inline TValue init_xrstruct(void) noexcept {
     return initialise_xrstruct<TValue>();
 }
 
-
 XRTL_NAMESPACE_END
 
 #endif /* !defined(_XRTL_INITIALISE_H) */
