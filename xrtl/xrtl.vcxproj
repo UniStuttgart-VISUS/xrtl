@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="include\xrtl\api.h" />
     <ClInclude Include="include\xrtl\initialise.h" />
+    <ClInclude Include="include\xrtl\path.h" />
     <ClInclude Include="include\xrtl\result.h" />
     <ClInclude Include="include\xrtl\unique_handle.h" />
     <ClInclude Include="include\xrtl\xr_error_category.h" />

@@ -16,7 +16,7 @@ TEST_CLASS(traits_test) {
 
 public:
 
-    TEST_METHOD(tst_xr_type_traits) {
+    TEST_METHOD(test_xr_type_traits) {
         Assert::AreEqual(int(XR_TYPE_API_LAYER_PROPERTIES),
             int(xrtl::xr_type_traits<XrApiLayerProperties>::value),
             L"XrApiLayerProperties", LINE_INFO());

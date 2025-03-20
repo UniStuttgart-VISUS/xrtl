@@ -13,6 +13,7 @@
 #include <openxr/openxr.h>
 
 #include <xrtl/initialise.h>
+#include <xrtl/path.h>
 #include <xrtl/result.h>
 #include <xrtl/unique_handle.h>
 #include <xrtl/xr_error_category.h>

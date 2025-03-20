@@ -33,6 +33,9 @@
     <ClInclude Include="include\xrtl\initialise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\xrtl\path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
