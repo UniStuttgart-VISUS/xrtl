@@ -131,6 +131,11 @@ typedef unique_handle<XrActionSet, ::xrDestroyActionSet> unique_action_set;
 typedef unique_handle<XrInstance, ::xrDestroyInstance> unique_instance;
 
 /// <summary>
+/// Specialisation for <see cref="XrSession" />.
+/// </summary>
+typedef xrtl::unique_handle<XrSession, ::xrDestroySession> unique_session;
+
+/// <summary>
 /// Specialisation for <see cref="XrSpace" />.
 /// </summary>
 typedef unique_handle<XrSpace, ::xrDestroySpace> unique_space;

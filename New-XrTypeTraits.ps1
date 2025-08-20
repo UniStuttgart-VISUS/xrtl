@@ -12,6 +12,10 @@ The Path parameter specifies the location of the XML specification.
 .PARAMETER Hide
 The Hide parameter specifies a list of types to be excluded.
 
+.PARAMETER HideAll
+The HideAll parameter specifies a list of extensions for which all types are to
+be excluded.
+
 .OUTPUTS
 The script returns the declaration for the xrtl::type_traits specialisations
 for all structures in the XML specification
@@ -23,7 +27,8 @@ for all structures in the XML specification
 [CmdletBinding()]
 param(
     [string] $Path = 'https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/refs/heads/main/specification/registry/xr.xml',
-    [string[]] $Hide = @('XrCoordinateSpaceCreateInfoML')
+    [string[]] $Hide = @('XrCoordinateSpaceCreateInfoML', 'XrDigitalLensControlALMALENCE', 'XrViewLocateInfo'),
+    [string[]] $HideAll = @('XR_MSFT_spatial_graph_bridge')
     )
 
 if ($Path -imatch 'https?://') {
@@ -40,23 +45,62 @@ $invocation = (Get-Variable MyInvocation -Scope Script).Value
 \******************************************************************************/
 "@
 
-# Determine the global #ifdef guards based on extensions.
+# Determine the global #ifdef guards based on feature levels extensions.
 $globalProtects = @{ }
 
-$Hide | ForEach-Object {
-    $globalProtects[$_] = 'false'
-}
+$specification.SelectNodes('//feature') | ForEach-Object {
+    $guard = $_.name
 
-$specification.SelectNodes('//extension') | ForEach-Object {
-    $guard = $_.protect
-    if (-not $guard) {
-        $guard = $_.name
+    if ($_.name -in $HideAll) {
+        # The name of the feature is in the HideAll list, so the guard for all
+        # its types is 'false'.
+        $guard = 'false'
     }
 
     $_.SelectNodes('require/type') | ForEach-Object {
         $type = $_.name
         $globalProtects[$type] = $guard.ToString()
     }
+}
+
+$specification.SelectNodes('//extension') | ForEach-Object {
+    # Check whether the extension has a protect attribute. If not, use its name
+    # as the guard.
+    $guard = $_.protect
+    if (-not $guard) {
+        $guard = $_.name
+    }
+
+    if ($_.name -in $HideAll) {
+        # The name of the extension is in the HideAll list, so the guard for all
+        # of its types is 'false'.
+        $guard = 'false'
+    }
+
+    $_.SelectNodes('require/type') | ForEach-Object {
+        $type = $_.name
+        $globalProtects[$type] = $guard.ToString()
+    }
+}
+
+# Some types are referenced by an alias name, which we need to resolve to the
+# original name in the extension. Note that we cannot write directly into the
+# target hash table, because we are enumerating its keys.
+$aliases = @{ }
+$globalProtects.Keys | ForEach-Object {
+    $type = $_
+    $specification.SelectNodes("//type[@alias=`"$type`"]") | ForEach-Object {
+        $aliases[$_.name] = $globalProtects[$type]
+    }
+}
+$aliases.Keys | ForEach-Object {
+    #Write-Warning $_
+    $globalProtects[$_] = $aliases[$_]
+}
+
+# Override forced disabled types.
+$Hide | ForEach-Object {
+    $globalProtects[$_] = 'false'
 }
 
 

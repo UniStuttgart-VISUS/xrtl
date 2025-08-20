@@ -14,6 +14,7 @@
 #include <openxr/openxr.h>
 
 #include "xrtl/api.h"
+#include "xrtl/unique_handle.h"
 
 
 XRTL_NAMESPACE_BEGIN
@@ -25,6 +26,16 @@ XRTL_NAMESPACE_BEGIN
 /// <param name="instance">The instance to be set. If you destroy the instance,
 /// call the method again with <c>XR_NULL_HANDLE</c>.</param>
 inline void xr_category_instance(_In_opt_ XrInstance instance);
+
+/// <summary>
+/// Sets the <paramref name="instance" /> in the OpenXR error category such
+/// that the category can retrieve an error string.
+/// </summary>
+/// <param name="instance">The instance to be set. If you destroy the instance,
+/// call the method again with <c>XR_NULL_HANDLE</c>.</param>
+inline void xr_category_instance(_In_ const unique_instance& instance) {
+    xr_category_instance(instance.get());
+}
 
 XRTL_NAMESPACE_END
 
