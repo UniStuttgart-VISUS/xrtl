@@ -23,3 +23,13 @@ auto ci = xrtl::init_xrstruct<XrInstanceCreateInfo>();
 xrtl::unique_instance instance;
 THROW_IF_XR_FAILED_MSG(::xrCreateInstance(&ci, instance.put()), "Failed to create OpenXR instance.");
 ```
+
+## Debug layer
+The `debug_messenger` class is an RAII wrapper for the OpenXR debug layer. It will load the necessary extension functions and create the debug messenger on construction and free it when its destructor is called. The `debug_messenger` comes with two policies, one marking it as optional, the other marking it as required. In optional mode, the class will fail silently if it cannot load the extension functions or the messenger cannot be created. In required mode, it will throw on the first error. Using one of the factory functions, a messenger in required mode can be created like this:
+```c++
+auto dbg_msg = xrtl::make_mandatory_debug_messenger(instance,
+    [](XrDebugUtilsMessageSeverityFlagsEXT severity, XrDebugUtilsMessageTypeFlagsEXT types, const XrDebugUtilsMessengerCallbackDataEXT *msg, void *user_data) {
+        std::cout << msg->functionName << ": " << msg->message << std::endl;
+        return static_cast<XrBool32>(XR_FALSE);
+    });
+```
