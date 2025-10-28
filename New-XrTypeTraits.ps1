@@ -27,7 +27,7 @@ for all structures in the XML specification
 [CmdletBinding()]
 param(
     [string] $Path = 'https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/refs/heads/main/specification/registry/xr.xml',
-    [string[]] $Hide = @('XrCoordinateSpaceCreateInfoML', 'XrDigitalLensControlALMALENCE', 'XrViewLocateInfo'),
+    [string[]] $Hide = @('XrCoordinateSpaceCreateInfoML', 'XrDigitalLensControlALMALENCE'),
     [string[]] $HideAll = @('XR_MSFT_spatial_graph_bridge')
     )
 
