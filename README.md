@@ -24,6 +24,38 @@ xrtl::unique_instance instance;
 THROW_IF_XR_FAILED_MSG(::xrCreateInstance(&ci, instance.put()), "Failed to create OpenXR instance.");
 ```
 
+## Maths interoperability
+The library provides functions for converting OpenXR maths types to DirectX Math and [glm](https://github.com/g-truc/glm). The former is available on Windows only, the latter requires `XRTL_WITH_GLM` being defined in the application.
+
+### DirectX Math
+```c++
+#include <xrtl/xmath.h>
+
+// Load an OpenXR vector.
+XrVector4f xr = { 1.0f, 2.0f, 3.0f, 4.0f };
+DirectX::XMVECTOR xm = xrtl::load_xmvector(xr);
+
+// Do things with the DirectX Math library.
+
+// Return the result.
+xrtl::store_xmvector(xr, xm);
+```
+
+### GLM
+```c++
+#define XRTL_WITH_GLM
+#include <xrtl/glm.h>
+
+// Load an OpenXR vector.
+XrVector4f xr = { 1.0f, 2.0f, 3.0f, 4.0f };
+glm::vec4 gl = xrtl::to_glm(xr);
+
+// Do things with GLM.
+
+// Return the result.
+xr = xrtl::from_glm(gl);
+```
+
 ## Debug layer
 The `debug_messenger` class is an RAII wrapper for the OpenXR debug layer. It will load the necessary extension functions and create the debug messenger on construction and free it when its destructor is called. The `debug_messenger` comes with two policies, one marking it as optional, the other marking it as required. In optional mode, the class will fail silently if it cannot load the extension functions or the messenger cannot be created. In required mode, it will throw on the first error. Using one of the factory functions, a messenger in required mode can be created like this:
 ```c++
