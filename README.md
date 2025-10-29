@@ -25,7 +25,7 @@ THROW_IF_XR_FAILED_MSG(::xrCreateInstance(&ci, instance.put()), "Failed to creat
 ```
 
 ## Maths interoperability
-The library provides functions for converting OpenXR maths types to DirectX Math and [glm](https://github.com/g-truc/glm). The former is available on Windows only, the latter requires `XRTL_WITH_GLM` being defined in the application.
+The library provides functions for converting OpenXR maths types to DirectX Math and [glm](https://github.com/g-truc/glm). The former is available on Windows only, the latter requires `XRTL_WITH_GLM` to be defined in the application.
 
 ### DirectX Math
 ```c++
@@ -39,6 +39,18 @@ DirectX::XMVECTOR xm = xrtl::load_xmvector(xr);
 
 // Return the result.
 xrtl::store_xmvector(xr, xm);
+
+// Loading is also supported for OpenXR poses.
+XrPosef pose;
+pose.position.x = 1.0f;
+pose.position.y = 0.0f;
+pose.position.z = 0.0f;
+pose.orientation.x = 0.0f;
+pose.orientation.y = 0.5f * ::sqrt(2.0f);
+pose.orientation.z = 0.0f;
+pose.orientation.w = pose.orientation.y;
+
+DirectX::XMMATRIX view_matrix = xrtl::load_xmmatrix(pose);
 ```
 
 ### GLM
@@ -54,6 +66,64 @@ glm::vec4 gl = xrtl::to_glm(xr);
 
 // Return the result.
 xr = xrtl::from_glm(gl);
+
+// Loading is also supported for OpenXR poses.
+XrPosef pose;
+pose.position.x = 1.0f;
+pose.position.y = 0.0f;
+pose.position.z = 0.0f;
+pose.orientation.x = 0.0f;
+pose.orientation.y = 0.5f * ::sqrt(2.0f);
+pose.orientation.z = 0.0f;
+pose.orientation.w = pose.orientation.y;
+
+// Loading is also supported for OpenXR poses.
+XrPosef pose;
+pose.position.x = 1.0f;
+pose.position.y = 0.0f;
+pose.position.z = 0.0f;
+pose.orientation.x = 0.0f;
+pose.orientation.y = 0.5f * ::sqrt(2.0f);
+pose.orientation.z = 0.0f;
+pose.orientation.w = pose.orientation.y;
+
+glm::mat view_matrix = xrtl::to_glm(pose);
+```
+
+### Projection matrix
+A projection matrix can be derived from `XrFovf` by providing a conversion from the typical input of functions building off-centre projection matrices like `DirectX::XMMatrixPerspectiveOffCenterRH` and `glm::frustumRH_ZO<float>`. The following two examples create the same right-handed projection matrix using a Direct3D-style z-range:
+```c++
+#include <DirectXMath.h>
+#include <xrtl/matrix.h>
+
+constexpr float near_plane = 0.1f;
+constexpr float far_plane = 100.0f;
+
+XrFovf fov;
+fov.angleLeft = -0.5f;
+fov.angleRight = 0.5f;
+fov.angleUp = 0.5f;
+fov.angleDown = -0.5f;
+
+auto proj_matrix = xrtl::make_matrix(DirectX::XMMatrixPerspectiveOffCenterRH, fov, near_plane, far_plane);
+```
+
+```c++
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include <xrtl/matrix.h>
+
+constexpr float near_plane = 0.1f;
+constexpr float far_plane = 100.0f;
+
+XrFovf fov;
+fov.angleLeft = -0.5f;
+fov.angleRight = 0.5f;
+fov.angleUp = 0.5f;
+fov.angleDown = -0.5f;
+
+// Note: be sure to instantiate the GLM template here, because this cannot be deduced.
+auto proj_matrix = xrtl::make_matrix(glm::frustumRH_ZO<float>, fov, near_plane, far_plane);
 ```
 
 ## Debug layer
