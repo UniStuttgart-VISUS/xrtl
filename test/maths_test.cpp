@@ -1,4 +1,4 @@
-﻿// <copyright file="math_test.cpp" company="Visualisierungsinstitut der Universität Stuttgart">
+﻿// <copyright file="maths_test.cpp" company="Visualisierungsinstitut der Universität Stuttgart">
 // Copyright © 2025 Visualisierungsinstitut der Universität Stuttgart.
 // Licensed under the MIT licence. See LICENCE file for details.
 // </copyright>
@@ -16,7 +16,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace xrtltest {
 
-TEST_CLASS(math_test) {
+TEST_CLASS(maths_test) {
 
 public:
 

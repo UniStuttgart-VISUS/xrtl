@@ -162,7 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="init_test.cpp" />
-    <ClCompile Include="math_test.cpp" />
+    <ClCompile Include="maths_test.cpp" />
     <ClCompile Include="path_test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
