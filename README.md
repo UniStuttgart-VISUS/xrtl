@@ -77,16 +77,6 @@ pose.orientation.y = 0.5f * ::sqrt(2.0f);
 pose.orientation.z = 0.0f;
 pose.orientation.w = pose.orientation.y;
 
-// Loading is also supported for OpenXR poses.
-XrPosef pose;
-pose.position.x = 1.0f;
-pose.position.y = 0.0f;
-pose.position.z = 0.0f;
-pose.orientation.x = 0.0f;
-pose.orientation.y = 0.5f * ::sqrt(2.0f);
-pose.orientation.z = 0.0f;
-pose.orientation.w = pose.orientation.y;
-
 glm::mat view_matrix = xrtl::to_glm(pose);
 ```
 
@@ -96,8 +86,8 @@ A projection matrix can be derived from `XrFovf` by providing a conversion from 
 #include <DirectXMath.h>
 #include <xrtl/matrix.h>
 
-constexpr float near_plane = 0.1f;
-constexpr float far_plane = 100.0f;
+constexpr auto near_plane = 0.1f;
+constexpr auto far_plane = 100.0f;
 
 XrFovf fov;
 fov.angleLeft = -0.5f;
@@ -113,8 +103,8 @@ auto proj_matrix = xrtl::make_matrix(DirectX::XMMatrixPerspectiveOffCenterRH, fo
 #include <glm/ext.hpp>
 #include <xrtl/matrix.h>
 
-constexpr float near_plane = 0.1f;
-constexpr float far_plane = 100.0f;
+constexpr auto near_plane = 0.1f;
+constexpr auto far_plane = 100.0f;
 
 XrFovf fov;
 fov.angleLeft = -0.5f;
