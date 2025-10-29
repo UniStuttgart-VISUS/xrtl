@@ -7,6 +7,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
+#include <xrtl/xr_type_traits.h>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 

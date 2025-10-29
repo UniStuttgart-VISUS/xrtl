@@ -137,15 +137,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\xrtl\api.h" />
+    <ClInclude Include="include\xrtl\glm.h" />
     <ClInclude Include="include\xrtl\initialise.h" />
+    <ClInclude Include="include\xrtl\matrix.h" />
     <ClInclude Include="include\xrtl\path.h" />
     <ClInclude Include="include\xrtl\result.h" />
     <ClInclude Include="include\xrtl\unique_handle.h" />
+    <ClInclude Include="include\xrtl\xmath.h" />
     <ClInclude Include="include\xrtl\xr_error_category.h" />
     <ClInclude Include="include\xrtl\xr_type_traits.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\xrtl\matrix.inl" />
     <None Include="include\xrtl\unique_handle.inl" />
+    <None Include="include\xrtl\xmath.inl" />
     <None Include="include\xrtl\xr_error_category.inl" />
     <None Include="include\xrtl\xr_type_traits.inl" />
     <None Include="packages.config" />

@@ -8,15 +8,14 @@
 #define PCH_H
 #pragma once
 
+#define XRTL_WITH_GLM
+
+#include <DirectXMath.h>
 #include <Windows.h>
 
-#include <openxr/openxr.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
-#include <xrtl/initialise.h>
-#include <xrtl/path.h>
-#include <xrtl/result.h>
-#include <xrtl/unique_handle.h>
-#include <xrtl/xr_error_category.h>
-#include <xrtl/xr_type_traits.h>
+#include <openxr/openxr.h>
 
 #endif /* !defined(_PCH_H) */

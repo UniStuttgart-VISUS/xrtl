@@ -36,6 +36,15 @@
     <ClInclude Include="include\xrtl\path.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\xrtl\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\xrtl\xmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\xrtl\glm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -47,6 +56,12 @@
     </None>
     <None Include="$(OpenXRLoaderBinaryRoot)\bin\openxr_loader.dll" />
     <None Include="include\xrtl\xr_type_traits.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\xrtl\matrix.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\xrtl\xmath.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\OpenXR.1.1.43.1\build\native\openxr.props" Condition="Exists('..\packages\OpenXR.1.1.43.1\build\native\openxr.props')" />
+  <Import Project="..\packages\OpenXR.1.1.47\build\native\openxr.props" Condition="Exists('..\packages\OpenXR.1.1.47\build\native\openxr.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="init_test.cpp" />
+    <ClCompile Include="math_test.cpp" />
     <ClCompile Include="path_test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -181,13 +182,15 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\OpenXR.1.1.43.1\build\native\openxr.targets" Condition="Exists('..\packages\OpenXR.1.1.43.1\build\native\openxr.targets')" />
+    <Import Project="..\packages\OpenXR.1.1.47\build\native\openxr.targets" Condition="Exists('..\packages\OpenXR.1.1.47\build\native\openxr.targets')" />
+    <Import Project="..\packages\glm.1.0.1\build\native\glm.targets" Condition="Exists('..\packages\glm.1.0.1\build\native\glm.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenXR.1.1.43.1\build\native\openxr.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenXR.1.1.43.1\build\native\openxr.props'))" />
-    <Error Condition="!Exists('..\packages\OpenXR.1.1.43.1\build\native\openxr.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenXR.1.1.43.1\build\native\openxr.targets'))" />
+    <Error Condition="!Exists('..\packages\OpenXR.1.1.47\build\native\openxr.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenXR.1.1.47\build\native\openxr.props'))" />
+    <Error Condition="!Exists('..\packages\OpenXR.1.1.47\build\native\openxr.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenXR.1.1.47\build\native\openxr.targets'))" />
+    <Error Condition="!Exists('..\packages\glm.1.0.1\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.1.0.1\build\native\glm.targets'))" />
   </Target>
 </Project>

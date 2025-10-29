@@ -7,6 +7,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
+#include <xrtl/initialise.h>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
