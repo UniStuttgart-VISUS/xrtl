@@ -25,7 +25,7 @@ THROW_IF_XR_FAILED_MSG(::xrCreateInstance(&ci, instance.put()), "Failed to creat
 ```
 
 ## Maths interoperability
-The library provides functions for converting OpenXR maths types to DirectX Math and [glm](https://github.com/g-truc/glm). The former is available on Windows only, the latter requires `XRTL_WITH_GLM` to be defined in the application.
+The library provides functions for converting OpenXR maths types to [DirectX Math](https://github.com/microsoft/DirectXMath) and [glm](https://github.com/g-truc/glm). The former is available on Windows only, the latter requires `XRTL_WITH_GLM` to be defined in the application.
 
 ### DirectX Math
 ```c++
